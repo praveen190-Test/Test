@@ -1,208 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Annu 💖 Valentine</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For Annu ❤️</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
 
-<style>
-*{box-sizing:border-box}
-body{
-  margin:0;
-  height:100vh;
-  background:linear-gradient(135deg,#ff9a9e,#fad0c4);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-family:'Poppins',sans-serif;
-  overflow:hidden;
-}
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
 
-/* Floating hearts */
-.heart{
-  position:absolute;
-  font-size:18px;
-  animation:float 7s linear infinite;
-  opacity:.6;
-}
-@keyframes float{
-  from{transform:translateY(100vh) scale(.7)}
-  to{transform:translateY(-10vh) scale(1.2)}
-}
+    .card {
+      background: white;
+      width: 90%;
+      max-width: 420px;
+      padding: 25px;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      position: relative;
+    }
 
-/* Card */
-.card{
-  background:#fff;
-  padding:32px 28px;
-  border-radius:26px;
-  width:420px;
-  max-height:90vh;
-  text-align:center;
-  box-shadow:0 25px 60px rgba(0,0,0,.25);
-  z-index:2;
-  overflow:hidden;
-}
+    h1 {
+      color: #ff4d6d;
+      margin-bottom: 10px;
+    }
 
-/* Heading */
-h1{
-  font-family:'Pacifico',cursive;
-  color:#ff4d6d;
-  font-size:28px;
-  margin-bottom:8px;
-}
-.name{
-  animation:glow 2s infinite alternate;
-}
-@keyframes glow{
-  from{text-shadow:0 0 5px #ffb3c1}
-  to{text-shadow:0 0 14px #ff4d6d}
-}
+    p {
+      color: #444;
+      line-height: 1.6;
+      font-size: 15px;
+    }
 
-p{
-  color:#444;
-  font-size:14px;
-  line-height:1.4;
-}
+    button {
+      border: none;
+      padding: 14px 22px;
+      border-radius: 30px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 10px;
+    }
 
-/* Buttons */
-button{
-  border:none;
-  border-radius:40px;
-  padding:12px 24px;
-  font-size:17px;
-  cursor:pointer;
-  transition:.3s;
-}
-#yesBtn{
-  background:linear-gradient(135deg,#ff4d6d,#ff758f);
-  color:#fff;
-  font-size:19px;
-  box-shadow:0 12px 25px rgba(255,77,109,.6);
-  animation:pulse 1.4s infinite;
-}
-@keyframes pulse{
-  0%{transform:scale(1)}
-  50%{transform:scale(1.06)}
-  100%{transform:scale(1)}
-}
-#noBtn{
-  background:#e0e0e0;
-  margin-left:10px;
-  position:relative;
-}
+    #yesBtn {
+      background: #ff4d6d;
+      color: white;
+    }
 
-img{
-  width:100%;
-  max-height:170px;
-  object-fit:cover;
-  border-radius:14px;
-  margin-top:12px;
-}
+    #noBtn {
+      background: #e0e0e0;
+    }
 
-/* Confetti */
-.confetti{
-  position:absolute;
-  width:8px;
-  height:8px;
-  animation:confetti 3.5s linear infinite;
-}
-@keyframes confetti{
-  from{transform:translateY(-10vh) rotate(0)}
-  to{transform:translateY(110vh) rotate(360deg)}
-}
-</style>
+    img {
+      width: 100%;
+      max-height: 220px;
+      object-fit: cover;
+      border-radius: 15px;
+      margin-top: 15px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 18px;
+      animation: fall 5s linear infinite;
+      top: -10%;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(120vh); opacity: 0; }
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- Calm Romantic Background Music -->
 <audio id="music" loop>
   <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_4c9f1c37f6.mp3" type="audio/mpeg">
 </audio>
 
-<div class="card" id="box">
-  <h1>Will you be my Valentine, <span class="name">Annu</span>? 💖</h1>
-  <p>Someone wants to say something from the heart 💕</p>
+<div class="card" id="card">
+
+  <h1>Will you be my Valentine? 💖</h1>
 
   <button id="yesBtn">Yes 😍</button>
-  <button id="noBtn">No 🙈</button>
+  <button id="noBtn">No 😜</button>
+
 </div>
 
 <script>
-/* Floating hearts */
-for(let i=0;i<18;i++){
-  const h=document.createElement("div");
-  h.className="heart";
-  h.innerHTML="💖";
-  h.style.left=Math.random()*100+"vw";
-  h.style.animationDelay=Math.random()*6+"s";
-  h.style.fontSize=14+Math.random()*18+"px";
-  document.body.appendChild(h);
-}
+  const card = document.getElementById("card");
+  const music = document.getElementById("music");
+  const noTexts = [
+    "Are you sure?",
+    "Think again 🤔",
+    "You’ll regret this 😜",
+    "Last chance!",
+    "Really?? 😭"
+  ];
+  let noCount = 0;
 
-/* Logic */
-const noBtn=document.getElementById("noBtn");
-const yesBtn=document.getElementById("yesBtn");
-const box=document.getElementById("box");
-const music=document.getElementById("music");
+  document.getElementById("noBtn").onclick = () => {
+    document.getElementById("noBtn").innerText =
+      noTexts[Math.min(noCount++, noTexts.length - 1)];
+  };
 
-const noTexts=[
-  "Are you sure?",
-  "Think again 🤔",
-  "Please reconsider 🥺",
-  "Last chance!",
-  "Really?? 😭"
-];
+  document.getElementById("yesBtn").onclick = () => {
+    music.play();
 
-let step=0;
-let yesSize=19;
+    card.innerHTML = `
+      <h1>Yayyy!! 💖🥰</h1>
 
-noBtn.onclick=()=>{
-  if(step<noTexts.length){
-    noBtn.innerText=noTexts[step];
-    step++;
+      <p>
+        Tum mere liye hamesha important rahogi 💖<br><br>
+        I always love you.<br>
+        Kabhi kabhi main gussa dila deta hun wo temperory hota hai 🥺<br><br>
+        Thank you for understanding 💖<br>
+        Love you Annu 💕
+      </p>
+
+      <h2 style="color:#ff4d6d;">Will you go on a date with me? 💌</h2>
+
+      <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZWJpNGZ4ZzdhdTRoaGZ1YndtcXN0c3Z1ZXNsYnd0Y3R6aHR5YSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/MDJ9IbxxvDUQM/giphy.gif">
+    `;
+
+    startHearts();
+  };
+
+  function startHearts() {
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }, 300);
   }
-  yesSize+=3;
-  yesBtn.style.fontSize=yesSize+"px";
-  noBtn.style.position="absolute";
-  noBtn.style.left=Math.random()*65+"%";
-  noBtn.style.top=Math.random()*55+"%";
-};
-
-yesBtn.onclick=()=>{
-  music.play();
-  launchConfetti();
-  box.innerHTML=`
-    <h1>Yayyy!! 💖🥰</h1>
-
-    <p>
-    Tum mere liye hamesha important rahogi ❤️<br><br>
-    I always love you.<br>
-    Kabhi kabhi main gussa dila deta hun
-    wo temperory hota hai 🥺<br><br>
-    Thank you for understanding ❤️<br>
-    Love you Annu💕
-    </p>
-
-    <h3 style="color:#ff4d6d;margin:8px 0">
-      Will you go on a date with me? 💌
-    </h3>
-
-    <img src="https://media.giphy.com/media/xTiTnxpQ3ghPiB2Hp6/giphy.gif">
-  `;
-};
-
-/* Confetti */
-function launchConfetti(){
-  for(let i=0;i<55;i++){
-    const c=document.createElement("div");
-    c.className="confetti";
-    c.style.left=Math.random()*100+"vw";
-    c.style.background=["#ff4d6d","#ffd6e0","#ff758f"][Math.floor(Math.random()*3)];
-    c.style.animationDuration=2+Math.random()*2+"s";
-    document.body.appendChild(c);
-  }
-}
 </script>
 
 </body>
