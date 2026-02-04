@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
 <title>For Annu ❤️</title>
+
+<!-- Romantic Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 * {
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
 }
 
 body {
@@ -16,13 +19,14 @@ body {
   height: 100vh;
   background: linear-gradient(135deg, #ff9a9e, #fad0c4);
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   overflow: hidden;
+  font-family: 'Poppins', sans-serif;
 }
 
 .card {
-  background: white;
+  background: #fff;
   width: 90%;
   max-width: 420px;
   padding: 25px;
@@ -33,7 +37,10 @@ body {
 }
 
 h1 {
+  font-family: 'Pacifico', cursive;
   color: #ff4d6d;
+  font-size: 32px;
+  margin-bottom: 20px;
 }
 
 p {
@@ -81,20 +88,23 @@ img {
 .heart {
   position: fixed;
   font-size: 18px;
-  animation: fall 5s linear infinite;
   top: -10%;
+  animation: fall 5s linear forwards;
 }
 
 @keyframes fall {
-  0% { transform: translateY(0); opacity: 1; }
-  100% { transform: translateY(120vh); opacity: 0; }
+  to {
+    transform: translateY(120vh);
+    opacity: 0;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<audio id="music" loop>
+<!-- Audio MUST be unmuted and triggered by click -->
+<audio id="music" preload="auto">
   <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_4c9f1c37f6.mp3" type="audio/mpeg">
 </audio>
 
@@ -109,16 +119,17 @@ img {
 
 <script>
 const music = document.getElementById("music");
-let musicStarted = false;
+music.muted = false;
 
-function startMusic() {
-  if (!musicStarted) {
-    music.play();
-    musicStarted = true;
+let musicPlayed = false;
+
+function playMusic() {
+  if (!musicPlayed) {
+    music.play().then(() => {
+      musicPlayed = true;
+    }).catch(() => {});
   }
 }
-
-document.body.addEventListener("click", startMusic);
 
 const noTexts = [
   "Are you sure?",
@@ -131,19 +142,16 @@ const noTexts = [
 let noIndex = 0;
 const noBtn = document.getElementById("noBtn");
 
-noBtn.onclick = () => {
-  startMusic();
-
+noBtn.addEventListener("click", () => {
   noBtn.innerText = noTexts[Math.min(noIndex, noTexts.length - 1)];
   noIndex++;
 
-  // Move the No button randomly (playful)
   noBtn.style.left = Math.random() * 60 + "%";
   noBtn.style.top = Math.random() * 40 + "%";
-};
+});
 
-document.getElementById("yesBtn").onclick = () => {
-  startMusic();
+document.getElementById("yesBtn").addEventListener("click", () => {
+  playMusic();
 
   const card = document.getElementById("card");
   card.innerHTML = `
@@ -163,7 +171,7 @@ document.getElementById("yesBtn").onclick = () => {
   `;
 
   startHearts();
-};
+});
 
 function startHearts() {
   setInterval(() => {
