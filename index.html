@@ -22,7 +22,7 @@ body{
 /* Floating hearts */
 .heart{
   position:absolute;
-  font-size:20px;
+  font-size:18px;
   animation:float 7s linear infinite;
   opacity:.6;
 }
@@ -34,8 +34,8 @@ body{
 /* Card */
 .card{
   background:#fff;
-  padding:35px 30px;
-  border-radius:28px;
+  padding:32px 28px;
+  border-radius:26px;
   width:420px;
   max-height:90vh;
   text-align:center;
@@ -48,20 +48,20 @@ body{
 h1{
   font-family:'Pacifico',cursive;
   color:#ff4d6d;
-  font-size:30px;
-  margin-bottom:10px;
+  font-size:28px;
+  margin-bottom:8px;
 }
 .name{
   animation:glow 2s infinite alternate;
 }
 @keyframes glow{
   from{text-shadow:0 0 5px #ffb3c1}
-  to{text-shadow:0 0 15px #ff4d6d}
+  to{text-shadow:0 0 14px #ff4d6d}
 }
 
 p{
   color:#444;
-  font-size:15px;
+  font-size:14px;
   line-height:1.4;
 }
 
@@ -69,21 +69,21 @@ p{
 button{
   border:none;
   border-radius:40px;
-  padding:12px 26px;
-  font-size:18px;
+  padding:12px 24px;
+  font-size:17px;
   cursor:pointer;
   transition:.3s;
 }
 #yesBtn{
   background:linear-gradient(135deg,#ff4d6d,#ff758f);
   color:#fff;
-  font-size:20px;
+  font-size:19px;
   box-shadow:0 12px 25px rgba(255,77,109,.6);
   animation:pulse 1.4s infinite;
 }
 @keyframes pulse{
   0%{transform:scale(1)}
-  50%{transform:scale(1.07)}
+  50%{transform:scale(1.06)}
   100%{transform:scale(1)}
 }
 #noBtn{
@@ -94,10 +94,10 @@ button{
 
 img{
   width:100%;
-  max-height:180px;
+  max-height:170px;
   object-fit:cover;
-  border-radius:16px;
-  margin-top:15px;
+  border-radius:14px;
+  margin-top:12px;
 }
 
 /* Confetti */
@@ -115,9 +115,9 @@ img{
 </head>
 <body>
 
-<!-- Background Music -->
+<!-- Calm Romantic Background Music -->
 <audio id="music" loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_4c9f1c37f6.mp3" type="audio/mpeg">
 </audio>
 
 <div class="card" id="box">
@@ -130,13 +130,13 @@ img{
 
 <script>
 /* Floating hearts */
-for(let i=0;i<20;i++){
+for(let i=0;i<18;i++){
   const h=document.createElement("div");
   h.className="heart";
   h.innerHTML="💖";
   h.style.left=Math.random()*100+"vw";
   h.style.animationDelay=Math.random()*6+"s";
-  h.style.fontSize=16+Math.random()*18+"px";
+  h.style.fontSize=14+Math.random()*18+"px";
   document.body.appendChild(h);
 }
 
@@ -153,15 +153,16 @@ const noTexts=[
   "Last chance!",
   "Really?? 😭"
 ];
+
 let step=0;
-let yesSize=20;
+let yesSize=19;
 
 noBtn.onclick=()=>{
   if(step<noTexts.length){
     noBtn.innerText=noTexts[step];
     step++;
   }
-  yesSize+=4;
+  yesSize+=3;
   yesBtn.style.fontSize=yesSize+"px";
   noBtn.style.position="absolute";
   noBtn.style.left=Math.random()*65+"%";
@@ -174,26 +175,26 @@ yesBtn.onclick=()=>{
   box.innerHTML=`
     <h1>Yayyy!! 💖🥰</h1>
 
-    <p style="font-size:14px">
+    <p>
     Tum mere liye hamesha important rahogi ❤️<br><br>
     I always love you.<br>
-    Kabhi kabhi main gussa dila deta hun,
+    Kabhi kabhi main gussa dila deta hun
     wo temperory hota hai 🥺<br><br>
     Thank you for understanding ❤️<br>
-    Love you 💕
+    Love you Annu💕
     </p>
 
-    <h3 style="color:#ff4d6d;margin:10px 0">
+    <h3 style="color:#ff4d6d;margin:8px 0">
       Will you go on a date with me? 💌
     </h3>
 
-    <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif">
+    <img src="https://media.giphy.com/media/xTiTnxpQ3ghPiB2Hp6/giphy.gif">
   `;
 };
 
 /* Confetti */
 function launchConfetti(){
-  for(let i=0;i<60;i++){
+  for(let i=0;i<55;i++){
     const c=document.createElement("div");
     c.className="confetti";
     c.style.left=Math.random()*100+"vw";
